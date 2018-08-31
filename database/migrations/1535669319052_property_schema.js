@@ -7,7 +7,7 @@ class PropertySchema extends Schema {
     this.create('properties', (table) => {
       table.increments()
       table
-        .interger('user_id')
+        .integer('user_id')
         .unsigned()
         .references('id')
         .inTable('users')
