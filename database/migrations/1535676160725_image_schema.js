@@ -6,6 +6,7 @@ class ImageSchema extends Schema {
   up () {
     this.create('images', (table) => {
       table.increments()
+      table
       .integer('property_id')
       .unsigned()
       .references('id')

@@ -1,32 +1,26 @@
 'use strict'
 const Property = use('App/Models/Property')
 
-/**
- * Resourceful controller for interacting with properties
- */
 class PropertyController {
-  /**
-   * Show a list of all properties.
-   * GET properties
-   */
-  async index () {
+  
+  async index ({request}) {
 
-    const properties = Property.all()
-    return properties
+    //const properties = Property.all()
+    //return properties
+
+    const properties = Property.query()
+    .nearBy(latitude, longitude, 10)
+    .fetch()
+
+  return properties
   }
 
-  /**
-   * Render a form to be used for creating a new property.
-   * GET properties/create
-   */
+  
 
   async store ({ request, response }) {
   }
 
-  /**
-   * Display a single property.
-   * GET properties/:id
-   */
+  
   async show ({ params }) {
 
     const property = await Property.findOrFail(params.id)
@@ -36,17 +30,11 @@ class PropertyController {
     return property
   }
 
-  /**
-   * Update property details.
-   * PUT or PATCH properties/:id
-   */
+  
   async update ({ params, request, response }) {
   }
 
-  /**
-   * Delete a property with id.
-   * DELETE properties/:id
-   */
+  
   async destroy ({ params, auth, response }) {
     const property = await Property.findOrFail(params.id)
 
